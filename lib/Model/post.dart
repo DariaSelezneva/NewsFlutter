@@ -10,15 +10,15 @@ class Post {
   String username;
   List<String> tags;
 
-  Post({required this.id,
+  Post({
+    required this.id,
     required this.userId,
     required this.title,
     required this.description,
     required this.image,
     required this.username,
     required this.tags
-  }
-  );
+  });
 
   static List<Post> sample = [
     Post(
@@ -52,7 +52,7 @@ class Post {
         description: "We have #cookies!",
         image: "https://news-feed.dunice-testing.com/api/v1/file/70b02f1d-5340-4dad-87cc-29506c7f4668.",
         username: "Daria",
-        tags: ["cookies", "stuff", "stuff1"]),
+        tags: ["cookies", "stuff", "stuff1", "something", "tag"]),
     Post(
         id: 3796,
         userId: "f52bec9a-e11e-46f7-8b0f-83aa58593dca",

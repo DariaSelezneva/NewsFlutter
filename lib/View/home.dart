@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/news_list.dart';
-import 'package:news_app/post.dart';
+import 'package:news_app/View/news_list.dart';
+import 'package:news_app/Model/post.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
