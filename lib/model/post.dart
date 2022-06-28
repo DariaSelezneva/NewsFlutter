@@ -62,4 +62,16 @@ class Post {
         username: "Daria",
         tags: [])
   ];
+
+  factory Post.fromJson(Map<String, dynamic> json) {
+    final id = json['id'] as int;
+    final userId = json['userId'] as String;
+    final title = json['title'] as String;
+    final description = json['description'] as String;
+    final image = json['image'] as String;
+    final username = json['username'] as String;
+    final tagsList = json['tags'] as List;
+    final tags = tagsList.map((e) => e.toString()).toList();
+    return Post(id: id, userId: userId, title: title, description: description, image: image, username: username, tags: tags);
+  }
 }

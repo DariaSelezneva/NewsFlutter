@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/Model/post.dart';
+import 'package:news_app/View/tags_list.dart';
 
 class NewsCardLarge extends StatelessWidget {
-  const NewsCardLarge({Key? key, required this.post}) : super(key: key);
+  const NewsCardLarge({Key? key,
+    required this.post,
+    required this.activeTags,
+    required this.onTapTag}) : super(key: key);
 
   final Post post;
+  final List<String> activeTags;
+  final Function(String tag) onTapTag;
 
   void _onUserNamePressed() {
     print('pressed!');
@@ -26,7 +32,7 @@ class NewsCardLarge extends StatelessWidget {
                   const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
           Text(post.description, style: const TextStyle(fontSize: 14.0)),
           Container(
-              height: 30,
+              height: 40,
               margin: EdgeInsets.all(10),
               child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,22 +40,12 @@ class NewsCardLarge extends StatelessWidget {
                   children: [
                     TextButton(
                         onPressed: _onUserNamePressed,
-                        child: Text(post.username)),
-                    ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxWidth: MediaQuery.of(context).size.width - 100),
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        physics: AlwaysScrollableScrollPhysics(),
-                        itemCount: post.tags.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                              margin: const EdgeInsets.only(top: 8, left: 10, right: 10),
-                              child: Text('#' + post.tags[index]));
-                        },
-                      ),
-                    )
+                        child: Text('@' + post.username),
+                        style: ButtonStyle(textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16, fontWeight: FontWeight.bold))),),
+                    SizedBox(width: 12),
+                    TagsList(tags: post.tags,
+                      activeTags: activeTags,
+                      onTapTag: onTapTag )
                   ] // Row children
               )
           ),

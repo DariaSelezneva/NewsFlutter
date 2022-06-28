@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:news_app/Networking/api.dart';
-import 'package:news_app/Networking/Model/data_news_response.dart';
-import 'package:news_app/Model/post.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:news_app/networking/api.dart';
+import 'package:news_app/networking/Model/data_news_response.dart';
+import 'package:news_app/model/post.dart';
 
 
 abstract class NewsRepositoryLogic {
@@ -39,17 +40,11 @@ class NewsRepository implements NewsRepositoryLogic {
     if (tags != null && tags.isNotEmpty) {
       queryParameters['tags'] = tags.join(',');
     }
-    final uri = Uri.https(Api.newsURL, '', queryParameters);
+    final uri = Uri.https(Api.baseURL, Api.news, queryParameters);
     final response = await http.get(uri);
-    final jsonMap = jsonDecode(response.body);
-    print(jsonMap);
-    return Future<DataNewsResponse>.delayed(
-        Duration(seconds: 1),
-            () => DataNewsResponse(
-            content: Post.sample,
-            numberOfElements: Post.sample.length
-        )
-    );
+    final jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
+    final data = DataNewsResponse.fromJson(jsonMap);
+    return Future(() => data);
   }
 }
 

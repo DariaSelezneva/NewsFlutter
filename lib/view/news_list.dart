@@ -4,9 +4,12 @@ import 'package:news_app/Model/post.dart';
 
 class NewsList extends StatelessWidget {
 
-  const NewsList({Key? key, required this.news}) : super(key: key);
+  const NewsList({Key? key,
+    required this.news,
+    required this.activeTags}) : super(key: key);
 
   final List<Post> news;
+  final List<String> activeTags;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,10 @@ class NewsList extends StatelessWidget {
       child: ListView.builder(
         itemCount: news.length,
         itemBuilder: (BuildContext context, int index) {
-          return NewsCardLarge(post: news[index]);
+          return NewsCardLarge(
+              post: news[index],
+              activeTags: activeTags,
+              onTapTag: (tag) => { print(tag) });
         },
       ),
     );

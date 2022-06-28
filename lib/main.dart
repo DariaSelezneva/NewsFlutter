@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'View/home.dart';
+import 'Networking/news_repository.dart';
 
 void main() {
   runApp(const NewsApp());
@@ -11,6 +12,8 @@ class NewsApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final repo = NewsRepository();
+    final future = repo.getNews(1, 10);
     return MaterialApp(
       title: 'News',
       theme: ThemeData(
