@@ -1,10 +1,8 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:json_annotation/json_annotation.dart';
 import 'package:news_app/networking/api.dart';
-import 'package:news_app/networking/Model/data_news_response.dart';
-import 'package:news_app/model/post.dart';
+import 'package:news_app/networking/model/data_news_response.dart';
+import 'package:news_app/Model/post.dart';
 
 
 abstract class NewsRepositoryLogic {
@@ -27,6 +25,7 @@ class NewsRepository implements NewsRepositoryLogic {
         String? author,
         List<String>? tags
       ]) async {
+
     Map<String, String> queryParameters = {
       'page': page.toString(),
       'perPage': perPage.toString()

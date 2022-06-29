@@ -10,8 +10,14 @@ class UserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.all(10),
       child: Row(children: [
-        Image.network(user.avatar)
+        CircleAvatar(child: Image.network(user.avatar)),
+        Column(children: [
+          Text(user.name),
+          Text(user.email)
+        ]),
+        IconButton(onPressed: () => (print('')), icon: const Icon(Icons.close))
       ],),
     );
   }
