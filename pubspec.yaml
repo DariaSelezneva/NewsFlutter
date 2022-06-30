@@ -30,9 +30,12 @@ dependencies:
   flutter:
     sdk: flutter
   http: ^0.13.1
+  redux: ^5.0.0
   flutter_redux: ^0.10.0
+  redux_thunk: ^0.4.0
   shared_preferences: ^2.0.15
   json_annotation: ^4.5.0
+  image_picker: ^0.8.5+3
 
 
 
