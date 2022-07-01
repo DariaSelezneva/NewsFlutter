@@ -44,13 +44,28 @@ class _ImagePickerViewState extends State<ImagePickerView> {
         ElevatedButton(onPressed:
             () => setState(() => _showsButtons = !_showsButtons),
             child: Text('Select photo')),
-        if (_showsButtons) Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            OutlinedButton(onPressed: _getFromCamera, child: Text('Camera')),
-            SizedBox(width: 20),
-            OutlinedButton(onPressed: _getFromGallery, child: Text('Gallery'))
-        ],)
+        AnimatedSwitcher(
+          duration: Duration(milliseconds: 100),
+          child: _showsButtons ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              OutlinedButton(onPressed: _getFromCamera, child: Row(
+                children: [
+                  Icon(Icons.camera_alt),
+                  SizedBox(width: 8),
+                  Text('Camera'),
+                ],
+              )),
+              SizedBox(width: 20),
+              OutlinedButton(onPressed: _getFromGallery, child: Row(
+                children: [
+                  Icon(Icons.photo),
+                  SizedBox(width: 8),
+                  Text('Gallery'),
+                ],
+              ))
+          ],) : Container(),
+        )
       ],
     );
   }

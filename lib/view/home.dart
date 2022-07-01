@@ -33,9 +33,12 @@ class _HomeState extends State<Home> {
         onInit: (store) => store.dispatch(getNews),
         converter: (store) => store.state,
         builder: (context, state) {
-          return NewsList(news: state.news, activeTags: ['cookies']);
+          return NewsList(
+              news: state.news,
+              activeTags: ['cookies'],
+              isEditable: false);
         }),
-    ProfileScreen()
+    ProfileScreen(token: 'token')
   ];
 
   void _onItemTapped(int index) {

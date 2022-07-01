@@ -33,7 +33,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(height: 100),
                   EmailTextFormField(onChanged: (value) => _email = value),
                   SizedBox(height: 16),
-                  PasswordTextFormField(onChanged: (value) => _password = value),
+                  PasswordTextFormField(
+                      title: 'Password',
+                      onChanged: (value) => _password = value),
                   SizedBox(height: 40),
                   SizedBox(
                     width: 120,

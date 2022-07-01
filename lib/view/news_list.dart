@@ -6,10 +6,12 @@ class NewsList extends StatefulWidget {
 
   const NewsList({Key? key,
     required this.news,
-    required this.activeTags}) : super(key: key);
+    required this.activeTags,
+    required this.isEditable }) : super(key: key);
 
   final List<Post> news;
   final List<String> activeTags;
+  final bool isEditable;
 
   @override
   State<NewsList> createState() => _NewsListState();
@@ -21,16 +23,15 @@ class _NewsListState extends State<NewsList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        itemCount: widget.news.length,
-        itemBuilder: (BuildContext context, int index) {
-          return NewsCardLarge(
-              post: widget.news[index],
-              activeTags: widget.activeTags,
-              onTapTag: (tag) => { print(tag) });
-        },
-      ),
+    return ListView.builder(
+      itemCount: widget.news.length,
+      itemBuilder: (BuildContext context, int index) {
+        return NewsCardLarge(
+            post: widget.news[index],
+            activeTags: widget.activeTags,
+            isEditable: widget.isEditable,
+            onTapTag: (tag) => { print(tag) });
+      },
     );
   }
 

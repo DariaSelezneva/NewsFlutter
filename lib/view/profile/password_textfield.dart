@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class PasswordTextFormField extends StatefulWidget {
-  const PasswordTextFormField({Key? key, required this.onChanged}) : super(key: key);
+  const PasswordTextFormField({Key? key, required this.title, required this.onChanged, this.shouldMatchString}) : super(key: key);
 
+  final String title;
   final Function(String text) onChanged;
+  final String? shouldMatchString;
 
   @override
   State<PasswordTextFormField> createState() => _PasswordTextFormFieldState();
@@ -18,26 +20,28 @@ class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
     return TextFormField(
       autocorrect: false,
       obscureText: _passwordInVisible,
-      onChanged: (newValue) => widget.onChanged(newValue),
-      onSaved: (newValue) => widget.onChanged(newValue ?? ''),
+      onChanged: (text) => widget.onChanged(text),
       maxLength: 160,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
+      validator: (text) {
+        if (text == null || text.isEmpty) {
           return 'Please enter password';
         }
-        else if (value.length < 4) {
+        else if (text.length < 4) {
           return 'Password is too short';
+        }
+        else if (widget.shouldMatchString != null && text != widget.shouldMatchString) {
+          return "Password doesn't match confirmation";
         }
         else {
           final regex = RegExp(r'^([A-Za-z0-9]+)$');
-          if (!regex.hasMatch(value)) {
+          if (!regex.hasMatch(text)) {
             return 'Password can only contain letters and digits';
           }
         }
       },
       decoration: InputDecoration(
         border: UnderlineInputBorder(),
-        labelText: 'Password',
+        labelText: widget.title,
         suffixIcon: IconButton(
           icon: Icon(
             _passwordInVisible ? Icons.visibility_off : Icons.visibility, //change icon based on boolean value

@@ -8,16 +8,16 @@ class EmailTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (newValue) => onChanged(newValue),
+      onChanged: (text) => onChanged(text),
       autocorrect: false,
       keyboardType: TextInputType.emailAddress,
-      validator: (value) {
-        if (value == null || value.isEmpty) {
+      validator: (text) {
+        if (text == null || text.isEmpty) {
           return 'Please enter email';
         }
         else {
           final regex = RegExp(r'^([A-Za-z0-9]+)([@]{1})([a-z]+)([.]{1})([a-z]+)$');
-          if (!regex.hasMatch(value)) {
+          if (!regex.hasMatch(text)) {
             return 'Invalid email';
           }
         }

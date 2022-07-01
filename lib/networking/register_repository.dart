@@ -23,7 +23,8 @@ class RegisterRepository implements RegistrationRepositoryLogic {
       'avatar': avatar,
       'email': email,
       'name': name,
-      'password' : password
+      'password' : password,
+      'role' : 'user'
     };
     //encode Map to JSON
     final body = jsonEncode(data);
@@ -32,7 +33,9 @@ class RegisterRepository implements RegistrationRepositoryLogic {
         headers: {"Content-Type": "application/json"},
         body: body
     );
+    print(response.statusCode);
     final jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
+    print(jsonMap);
     final authResponse = AuthResponse.fromJson(jsonMap);
     return Future(() => authResponse);
   }

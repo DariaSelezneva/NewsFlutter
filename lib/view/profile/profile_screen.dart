@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/model/user.dart';
 import 'package:news_app/view/profile/login_screen.dart';
 import 'package:news_app/view/profile/user_screen.dart';
 
@@ -10,8 +11,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return token == null ?
-    const LoginScreen() :
-    const UserScreen();
+    return Scaffold(
+        body: token == null ?
+        const LoginScreen() :
+        UserScreen(user: User.sample));
   }
 }
