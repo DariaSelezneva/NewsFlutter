@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/model/user.dart';
+import 'package:news_app/view/profile/edit_user.dart';
 
 class UserCard extends StatelessWidget {
 
@@ -37,10 +38,22 @@ class UserCard extends StatelessWidget {
               style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.normal
-              ))
+              )
+          )
         ]),
         Expanded(child: Container()),
-        isEditable ? IconButton(onPressed: () => {}, icon: const Icon(Icons.edit)) :
+        isEditable ? IconButton(onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              isScrollControlled: true,
+              builder: (BuildContext context) {
+                return EditUserSheet(user: user);
+              }
+          );
+        }, icon: const Icon(Icons.edit)) :
         IconButton(onPressed: () => {}, icon: const Icon(Icons.close))
       ],),
     );

@@ -8,6 +8,13 @@ import 'package:news_app/Networking/news_repository.dart';
 ThunkAction<AppState> getNews = (Store<AppState> store) async {
   final repo = NewsRepository();
   await repo
-      .getNews(1, 10)
-      .then((response) => store.dispatch(GetNewsAction(response.content)));
+      .getNews(1)
+      .then((response) => store.dispatch(GetNewsAction(response.content, response.numberOfElements)));
+};
+
+ThunkAction<AppState> loadMore = (Store<AppState> store) async {
+  final repo = NewsRepository();
+  await repo
+      .getNews(2)
+      .then((response) => store.dispatch(GetNewsAction(response.content, response.numberOfElements)));
 };

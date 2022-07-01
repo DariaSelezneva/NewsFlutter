@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:news_app/networking/api.dart';
 import 'package:news_app/networking/model/auth_response.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 abstract class RegistrationRepositoryLogic {
   Future<AuthResponse> register({
@@ -33,10 +34,9 @@ class RegisterRepository implements RegistrationRepositoryLogic {
         headers: {"Content-Type": "application/json"},
         body: body
     );
-    print(response.statusCode);
     final jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
-    print(jsonMap);
     final authResponse = AuthResponse.fromJson(jsonMap);
+    await FlutterSecureStorage().write(key: 'token', value: authResponse.token);
     return Future(() => authResponse);
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:news_app/networking/api.dart';
 import 'package:news_app/networking/model/auth_response.dart';
@@ -22,6 +23,7 @@ class LoginRepository implements LoginRepositoryLogic {
     );
     final jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
     final authResponse = AuthResponse.fromJson(jsonMap);
+    await FlutterSecureStorage().write(key: 'token', value: authResponse.token);
     return Future(() => authResponse);
   }
 }

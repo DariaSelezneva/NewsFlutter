@@ -3,14 +3,30 @@ import 'package:news_app/model/user.dart';
 
 class AppState {
 
-  final List<Post> _news;
-  final User? _user;
+  final List<Post> news;
+  final int page;
+  final int numberOfElements;
 
-  List<Post> get news => _news;
-  User? get user => _user;
+  final User? user;
+  final String? token;
 
-  AppState(this._news, this._user);
+  // List<Post> get news => _news;
+  // int get page => _page;
+  // int get numberOfElements => _numberOfElements;
+  // User? get user => _user;
+  // String? get token => _token;
 
-  AppState.initialState() : _news = [], _user = null;
+  AppState({
+    required this.news,
+    required this.page,
+    required this.numberOfElements,
+    required this.user,
+    required this.token});
 
+  AppState.initialState() :
+        news = [],
+        page = 1,
+        numberOfElements = 0,
+        user = null,
+        token = null;
 }

@@ -8,7 +8,6 @@ import 'package:news_app/Model/post.dart';
 abstract class NewsRepositoryLogic {
   Future<DataNewsResponse> getNews(
       int page,
-      int perPage,
       [
         String? keywords,
         String? author,
@@ -19,7 +18,6 @@ abstract class NewsRepositoryLogic {
 class NewsRepository implements NewsRepositoryLogic {
   Future<DataNewsResponse> getNews(
       int page,
-      int perPage,
       [
         String? keywords,
         String? author,
@@ -28,7 +26,7 @@ class NewsRepository implements NewsRepositoryLogic {
 
     Map<String, String> queryParameters = {
       'page': page.toString(),
-      'perPage': perPage.toString()
+      'perPage': '10'
     };
     if (keywords != null) {
       queryParameters['keywords'] = keywords;
@@ -50,7 +48,6 @@ class NewsRepository implements NewsRepositoryLogic {
 class NewsRepositoryMock implements NewsRepositoryLogic {
   Future<DataNewsResponse> getNews(
       int page,
-      int perPage,
       [
         String? keywords,
         String? author,

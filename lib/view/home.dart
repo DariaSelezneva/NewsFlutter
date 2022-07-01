@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news_app/View/news_list.dart';
 import 'package:news_app/Model/post.dart';
+import 'package:news_app/middleware/user_middleware.dart';
 import 'package:news_app/networking/model/data_news_response.dart';
 import 'package:news_app/Networking/news_repository.dart';
 import 'package:news_app/view/profile/profile_screen.dart';
@@ -20,15 +21,6 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   static List<Widget> pages = <Widget>[
-       //     builder: (context, AsyncSnapshot<DataNewsResponse> snapshot) {
-    // FutureBuilder(
-    //     future: NewsRepository().getNews(1, 5),
-    //       final news = snapshot.data?.content ?? [];
-    //       return NewsList(
-    //         news: news,
-    //         activeTags: ['cookies'],
-    //       );
-    //     }),
     StoreConnector<AppState, AppState>(
         onInit: (store) => store.dispatch(getNews),
         converter: (store) => store.state,
@@ -38,7 +30,13 @@ class _HomeState extends State<Home> {
               activeTags: ['cookies'],
               isEditable: false);
         }),
-    ProfileScreen(token: 'token')
+    StoreConnector<AppState, AppState>(
+        onInit: (store) => store.dispatch(getToken),
+        converter: (store) => store.state,
+        builder: (context, state) {
+          return ProfileScreen(token: state.token);
+        })
+
   ];
 
   void _onItemTapped(int index) {
