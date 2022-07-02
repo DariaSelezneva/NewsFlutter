@@ -33,3 +33,16 @@ class GetUserAction {
   GetUserAction(this._user);
 
 }
+
+class UpdateUserAction {
+
+  final User _user;
+
+  User get user => _user;
+
+  UpdateUserAction(this._user);
+}
+
+class CreatePostAction {
+
+}

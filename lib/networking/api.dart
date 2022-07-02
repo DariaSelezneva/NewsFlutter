@@ -11,20 +11,8 @@ class Api {
 
   static const news = '/api/v1/news/find';
   static const user = '/api/v1/user';
+  static const userNews = '/api/v1/news/user/';
 
   static const userInfo = '/api/v1/user/info';
-
-  // URLs
-
-  // static const loginURL = baseURL + login;
-  // static const registerURL = baseURL + register;
-  //
-  // static const uploadFileURL = baseURL + uploadFile;
-  //
-  // static const newsURL = baseURL + news;
-  // static const findNewsURL = baseURL + news;
-  //
-  // static const userURL = baseURL + user;
-  // static const getUserInfoURL = baseURL + userInfo;
 
 }

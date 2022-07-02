@@ -10,8 +10,6 @@ class ProfileScreen extends StatelessWidget {
 
   const ProfileScreen({Key? key}) : super(key: key);
 
-  // final String? token;
-
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, AppState>(
@@ -21,7 +19,7 @@ class ProfileScreen extends StatelessWidget {
           return Scaffold(
             body: state.token == null ?
               const LoginScreen() :
-              UserScreen(user: User.sample));
+              UserScreen());
         }
     );
   }

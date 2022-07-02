@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news_app/app_state/app_state.dart';
@@ -20,6 +22,7 @@ class EditUserSheet extends StatefulWidget {
 class _EditUserSheetState extends State<EditUserSheet> {
 
   final _formKey = GlobalKey<FormState>();
+  File? _imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +44,7 @@ class _EditUserSheetState extends State<EditUserSheet> {
                         children: [
                           ImagePickerView(
                               url: widget.user.avatar,
-                              onSetImage: (image) => {}),
+                              onSetImage: (image) => _imageFile = image),
                           SizedBox(height: 12),
                           TextFormField(
                               initialValue: widget.user.name,
@@ -66,7 +69,12 @@ class _EditUserSheetState extends State<EditUserSheet> {
                             children: [
                               Expanded(child: OutlinedButton(onPressed: () => Navigator.pop(context), child: Text('Cancel'))),
                               SizedBox(width: 20),
-                              Expanded(child: ElevatedButton(onPressed: () => {}, child: Text('Save'))),
+                              Expanded(child: ElevatedButton(onPressed: () {
+                                store.dispatch(
+                                      (store) => updateUser(store, _imageFile, widget.user.avatar, widget.user.email, widget.user.name));
+                                Navigator.pop(context);
+                              },
+                                  child: Text('Save'))),
                             ],
                           ),
                         ],

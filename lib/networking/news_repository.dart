@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:news_app/networking/api.dart';
 import 'package:news_app/networking/model/data_news_response.dart';
@@ -13,6 +14,8 @@ abstract class NewsRepositoryLogic {
         String? author,
         List<String>? tags
       ]);
+
+  Future<DataNewsResponse> getUserNews(String userId);
 }
 
 class NewsRepository implements NewsRepositoryLogic {
@@ -43,22 +46,20 @@ class NewsRepository implements NewsRepositoryLogic {
     final data = DataNewsResponse.fromJson(jsonMap);
     return Future(() => data);
   }
-}
 
-class NewsRepositoryMock implements NewsRepositoryLogic {
-  Future<DataNewsResponse> getNews(
-      int page,
-      [
-        String? keywords,
-        String? author,
-        List<String>? tags
-      ]) {
-    return Future<DataNewsResponse>.delayed(
-        Duration(seconds: 1),
-            () => DataNewsResponse(
-                content: Post.sample,
-                numberOfElements: Post.sample.length
-            )
-    );
+  Future<DataNewsResponse> getUserNews(String userId) async {
+    final token = await FlutterSecureStorage().read(key: 'token') as String;
+    Map<String, String> queryParameters = {
+      'page': '1',
+      'perPage': '10'
+    };
+    final uri = Uri.https(Api.baseURL, Api.userNews + userId, queryParameters);
+    final response = await http.get(uri, headers: {
+      "Content-Type": "application/json",
+      'Authorization' : token});
+    final jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
+    print(jsonMap);
+    final data = DataNewsResponse.fromJson(jsonMap);
+    return Future(() => data);
   }
 }
