@@ -22,6 +22,8 @@ class LoginAction {
 
 }
 
+class LogoutAction {}
+
 class GetUserAction {
 
   final User _user;

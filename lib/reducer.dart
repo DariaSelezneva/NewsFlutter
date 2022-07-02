@@ -1,33 +1,53 @@
 import 'package:news_app/actions/user_actions.dart';
+import 'package:news_app/app_state/screen_state.dart';
 
-import 'app_state.dart';
+import 'app_state/app_state.dart';
 import 'actions/get_news_action.dart';
 
 AppState reducer(AppState prev, dynamic action) {
   if (action is GetNewsAction) {
     return AppState(
-        news: action.news,
-        page: 1,
-        numberOfElements:
-        action.numberOfElements,
-        user: prev.user,
+        commonState: ScreenState(
+            news: action.news,
+            page: 1,
+            numberOfElements:
+            action.numberOfElements,
+            user: prev.commonState.user),
+        userState: prev.userState,
         token: prev.token);
   } else if (action is LoadMoreAction) {
     return AppState(
-        news: prev.news + action.news,
-        page: prev.page + 1,
-        numberOfElements:
-        action.numberOfElements,
-        user: prev.user,
+        commonState: ScreenState(
+            news: prev.commonState.news + action.news,
+            page: prev.commonState.page + 1,
+            numberOfElements:
+            action.numberOfElements,
+            user: prev.commonState.user),
+        userState: prev.userState,
         token: prev.token);
   } else if (action is GetTokenAction) {
     return AppState(
-        news: prev.news,
-        page: prev.page,
-        numberOfElements:
-        prev.numberOfElements,
-        user: prev.user,
+        commonState: prev.commonState,
+        userState: prev.userState,
         token: action.token);
+  } else if (action is LoginAction) {
+    return AppState(
+        commonState: prev.commonState,
+        userState: ScreenState(
+            news: prev.userState.news,
+            page: prev.userState.page,
+            numberOfElements: prev.userState.numberOfElements,
+            user: action.user),
+        token: action.token);
+  } else if (action is LogoutAction) {
+    return AppState(
+        commonState: prev.commonState,
+        userState: ScreenState(
+            news: prev.userState.news,
+            page: prev.userState.page,
+            numberOfElements: prev.userState.numberOfElements,
+            user: null),
+        token: null);
   }
   else {
     return prev;

@@ -1,14 +1,10 @@
-// import 'dart:js';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news_app/View/news_list.dart';
-import 'package:news_app/Model/post.dart';
 import 'package:news_app/middleware/user_middleware.dart';
-import 'package:news_app/networking/model/data_news_response.dart';
-import 'package:news_app/Networking/news_repository.dart';
 import 'package:news_app/view/profile/profile_screen.dart';
 import 'package:news_app/middleware/get_news_middleware.dart';
-import 'package:news_app/app_state.dart';
+import 'package:news_app/app_state/app_state.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,6 +14,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
   int _selectedIndex = 0;
 
   static List<Widget> pages = <Widget>[
@@ -26,16 +23,16 @@ class _HomeState extends State<Home> {
         converter: (store) => store.state,
         builder: (context, state) {
           return NewsList(
-              news: state.news,
+              news: state.commonState.news,
               activeTags: ['cookies'],
               isEditable: false);
         }),
-    StoreConnector<AppState, AppState>(
-        onInit: (store) => store.dispatch(getToken),
-        converter: (store) => store.state,
-        builder: (context, state) {
-          return ProfileScreen(token: state.token);
-        })
+    // StoreConnector<AppState, AppState>(
+    //     onInit: (store) => store.dispatch(getToken),
+    //     converter: (store) => store.state,
+    //     builder: (context, state) {
+          ProfileScreen()
+        // }
 
   ];
 

@@ -4,8 +4,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 import 'reducer.dart';
 import 'View/home.dart';
-import 'app_state.dart';
-import 'Networking/login_repository.dart';
+import 'app_state/app_state.dart';
 
 void main() {
   runApp(NewsApp());
