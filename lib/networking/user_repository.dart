@@ -89,11 +89,13 @@ class UserRepository implements UserRepositoryLogic {
       'tags': tags};
     final body = jsonEncode(data);
     final uri = Uri.https(Api.baseURL, Api.news + '/$postId');
-    final response = await http.post(uri, headers: {
+    final response = await http.put(uri, headers: {
       "Content-Type": "application/json",
       'Authorization' : token},
         body: body);
+    print(response.statusCode);
     final jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
+    print(jsonMap);
     final success = jsonMap['success'] as bool;
     return Future(() => success);
   }
@@ -101,10 +103,11 @@ class UserRepository implements UserRepositoryLogic {
   Future<bool> deletePost(int postId) async {
     final token = await FlutterSecureStorage().read(key: 'token') as String;
     final uri = Uri.https(Api.baseURL, Api.news + '/$postId');
-    final response = await http.post(uri, headers: {
+    final response = await http.delete(uri, headers: {
       "Content-Type": "application/json",
       'Authorization' : token});
     final jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
+    print(jsonMap);
     final success = jsonMap['success'] as bool;
     return Future(() => success);
   }

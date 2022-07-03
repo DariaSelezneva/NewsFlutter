@@ -58,8 +58,7 @@ class NewsRepository implements NewsRepositoryLogic {
       "Content-Type": "application/json",
       'Authorization' : token});
     final jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
-    print(jsonMap);
-    final data = DataNewsResponse.fromJson(jsonMap);
+    final data = DataNewsResponse.fromJson(jsonMap['data']);
     return Future(() => data);
   }
 }

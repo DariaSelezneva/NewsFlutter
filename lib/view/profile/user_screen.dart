@@ -31,6 +31,7 @@ class UserScreen extends StatelessWidget {
                         width: MediaQuery.of(context).size.width - 10,
                         height: 50,
                         child: OutlinedButton(
+                            child: Text('New post'),
                             onPressed: () {
                               showModalBottomSheet(
                                   context: context,
@@ -39,11 +40,10 @@ class UserScreen extends StatelessWidget {
                                   ),
                                   isScrollControlled: true,
                                   builder: (BuildContext context) {
-                                    return EditPostSheet();
+                                    return EditPostSheet(user: user);
                                   }
                               );
-                            },
-                            child: Text('New post')
+                            }
                         ),
                       ),
                       Expanded(

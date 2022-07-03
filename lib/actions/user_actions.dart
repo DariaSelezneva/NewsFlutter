@@ -7,7 +7,7 @@ class GetTokenAction {
   GetTokenAction(this._token);
 }
 
-class LoginAction {
+class AuthAction {
 
   final User _user;
   final String? _token;
@@ -15,8 +15,16 @@ class LoginAction {
   User get user => _user;
   String? get token => _token;
 
-  LoginAction(this._user, this._token);
+  AuthAction(this._user, this._token);
 
+}
+
+class LoginAction extends AuthAction {
+  LoginAction(_user, _token) : super(_user, _token);
+}
+
+class RegisterAction extends AuthAction {
+  RegisterAction(_user, _token) : super(_user, _token);
 }
 
 class LogoutAction {}
@@ -37,4 +45,16 @@ class CreatePostAction {
   final Post _post;
   Post get post => _post;
   CreatePostAction(this._post);
+}
+
+class UpdatePostAction {
+  final Post _post;
+  Post get post => _post;
+  UpdatePostAction(this._post);
+}
+
+class DeletePostAction {
+  final int _postId;
+  int get postId => _postId;
+  DeletePostAction(this._postId);
 }

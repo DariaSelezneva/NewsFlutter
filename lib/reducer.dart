@@ -36,7 +36,7 @@ AppState reducer(AppState prev, dynamic action) {
         token: action.token,
         loadingState: LoadingState.success);
 
-  } else if (action is LoginAction) {
+  } else if (action is LoginAction || action is RegisterAction) {
     return AppState(
         commonState: prev.commonState,
         userState: ScreenState(
@@ -101,6 +101,7 @@ AppState reducer(AppState prev, dynamic action) {
             user: action.user),
         token: prev.token,
         loadingState: LoadingState.success);
+
   } else if (action is CreatePostAction) {
     var news = prev.userState.news;
     news.insert(0, action.post);
@@ -110,6 +111,35 @@ AppState reducer(AppState prev, dynamic action) {
             news: news,
             page: prev.userState.page,
             numberOfElements: prev.userState.numberOfElements + 1,
+            user: prev.userState.user),
+        token: prev.token,
+        loadingState: LoadingState.success);
+
+  } else if (action is UpdatePostAction) {
+    var news = prev.userState.news;
+    final index = news.indexWhere((element) => element.id == action.post.id);
+    news.removeAt(index);
+    news.insert(index, action.post);
+    return AppState(
+        commonState: prev.commonState,
+        userState: ScreenState(
+            news: news,
+            page: prev.userState.page,
+            numberOfElements: prev.userState.numberOfElements,
+            user: prev.userState.user),
+        token: prev.token,
+        loadingState: LoadingState.success);
+
+  } else if (action is DeletePostAction) {
+    var news = prev.userState.news;
+    final index = news.indexWhere((element) => element.id == action.postId);
+    news.removeAt(index);
+    return AppState(
+        commonState: prev.commonState,
+        userState: ScreenState(
+            news: news,
+            page: prev.userState.page,
+            numberOfElements: prev.userState.numberOfElements - 1,
             user: prev.userState.user),
         token: prev.token,
         loadingState: LoadingState.success);
