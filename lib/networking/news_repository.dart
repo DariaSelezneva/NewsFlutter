@@ -40,7 +40,7 @@ class NewsRepository implements NewsRepositoryLogic {
     if (tags != null && tags.isNotEmpty) {
       queryParameters['tags'] = tags.join(',');
     }
-    final uri = Uri.https(Api.baseURL, Api.news, queryParameters);
+    final uri = Uri.https(Api.baseURL, Api.findNews, queryParameters);
     final response = await http.get(uri);
     final jsonMap = jsonDecode(response.body) as Map<String, dynamic>;
     final data = DataNewsResponse.fromJson(jsonMap);

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:news_app/Model/post.dart';
 import 'package:news_app/Networking/login_repository.dart';
 import 'package:news_app/actions/user_actions.dart';
 import 'package:news_app/model/user.dart';
@@ -54,3 +55,23 @@ void updateUser(Store<AppState> store, File? image, String oldAvatar, String ema
         .then((user) => store.dispatch(UpdateUserAction(user)));
   }
 }
+
+void createPost(Store<AppState> store, User user, File? image, String title, String description, List<String> tags) async {
+  var imageUrl = "https://news-feed.dunice-testing.com/api/v1/file/693d86bf-fedd-47e8-8f00-332780ab46b8.";
+  if (image != null) {
+    await UploadRepository().upload(image: image)
+        .then((url) => imageUrl = url);
+  }
+  await UserRepository().createPost(imageUrl, title, description, tags)
+      .then((id) =>
+      store.dispatch(
+          CreatePostAction(
+              Post(id: id,
+                  userId: user.id,
+                  title: title,
+                  description: description,
+                  image: imageUrl,
+                  username: user.name,
+                  tags: tags))));
+}
+

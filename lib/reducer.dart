@@ -101,6 +101,18 @@ AppState reducer(AppState prev, dynamic action) {
             user: action.user),
         token: prev.token,
         loadingState: LoadingState.success);
+  } else if (action is CreatePostAction) {
+    var news = prev.userState.news;
+    news.insert(0, action.post);
+    return AppState(
+        commonState: prev.commonState,
+        userState: ScreenState(
+            news: news,
+            page: prev.userState.page,
+            numberOfElements: prev.userState.numberOfElements + 1,
+            user: prev.userState.user),
+        token: prev.token,
+        loadingState: LoadingState.success);
   }
   else {
     return prev;
