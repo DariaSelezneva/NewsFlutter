@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:news_app/app_state/app_state.dart';
+import 'package:news_app/redux/app_state/app_state.dart';
 import 'package:news_app/view/image_picker.dart';
 import 'package:news_app/view/profile/email_textfield.dart';
 import 'package:news_app/view/profile/password_textfield.dart';
 import 'package:redux/redux.dart';
-import 'package:news_app/middleware/user_middleware.dart';
+import 'package:news_app/redux/middleware/auth_middleware.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -88,9 +88,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 );
                               }
                               else {
+                                Navigator.pop(context);
                                 store.dispatch((store) =>
                                     register(store, _imageFile, _email, _name, _password));
-                                Navigator.pop(context);
                               }
                             }
                           },

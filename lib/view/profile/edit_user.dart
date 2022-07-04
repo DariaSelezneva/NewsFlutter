@@ -1,12 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:news_app/app_state/app_state.dart';
+import 'package:news_app/redux/app_state/app_state.dart';
 import 'package:news_app/model/user.dart';
 import 'package:news_app/view/image_picker.dart';
 import 'package:redux/redux.dart';
-import 'package:news_app/middleware/user_middleware.dart';
+import 'package:news_app/redux/middleware/user_middleware.dart';
+import 'package:news_app/redux/middleware/auth_middleware.dart';
 
 class EditUserSheet extends StatefulWidget {
   const EditUserSheet({

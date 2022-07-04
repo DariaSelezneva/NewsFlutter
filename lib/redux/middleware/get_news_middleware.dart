@@ -2,8 +2,8 @@ import 'package:news_app/networking/user_repository.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
 
-import 'package:news_app/actions/get_news_action.dart';
-import 'package:news_app/app_state/app_state.dart';
+import 'package:news_app/redux/actions/get_news_action.dart';
+import 'package:news_app/redux/app_state/app_state.dart';
 import 'package:news_app/Networking/news_repository.dart';
 
 ThunkAction<AppState> getNews = (Store<AppState> store) async {
@@ -32,3 +32,4 @@ ThunkAction<AppState> getUserAndHisNews = (Store<AppState> store) async {
           .then((response) => store.dispatch(GetUserAndHisNewsAction(user, response.content, response.numberOfElements)));
     });
 };
+

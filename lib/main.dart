@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
-import 'reducer.dart';
+import 'redux/reducers/reducer.dart';
 import 'View/home.dart';
-import 'app_state/app_state.dart';
+import 'redux/app_state/app_state.dart';
 
 void main() {
   runApp(NewsApp());

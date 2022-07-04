@@ -21,6 +21,10 @@ class GetUserNewsAction extends GetNewsAction {
   GetUserNewsAction(_news, _numberOfElements) : super(_news, _numberOfElements);
 }
 
+class GetAnotherUserNewsAction extends GetNewsAction {
+  GetAnotherUserNewsAction(_news, _numberOfElements) : super(_news, _numberOfElements);
+}
+
 class GetUserAndHisNewsAction {
   final User _user;
   final List<Post> _news;

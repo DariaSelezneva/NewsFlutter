@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:news_app/app_state/app_state.dart';
-import 'package:news_app/middleware/user_middleware.dart';
-import 'package:news_app/model/user.dart';
+import 'package:news_app/redux/app_state/app_state.dart';
+import 'package:news_app/redux/middleware/auth_middleware.dart';
 import 'package:news_app/view/profile/login_screen.dart';
 import 'package:news_app/view/profile/user_screen.dart';
 

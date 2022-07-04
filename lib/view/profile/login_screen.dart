@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:news_app/Networking/login_repository.dart';
-import 'package:news_app/app_state/app_state.dart';
+import 'package:news_app/redux/app_state/app_state.dart';
 import 'package:news_app/view/profile/password_textfield.dart';
 import 'package:news_app/view/profile/email_textfield.dart';
 import 'package:news_app/view/profile/register_screen.dart';
 import 'package:redux/redux.dart';
-import 'package:news_app/middleware/user_middleware.dart';
+import 'package:news_app/redux/middleware/auth_middleware.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

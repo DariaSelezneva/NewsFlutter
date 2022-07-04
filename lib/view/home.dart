@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news_app/View/news_list.dart';
-import 'package:news_app/middleware/user_middleware.dart';
 import 'package:news_app/view/profile/profile_screen.dart';
-import 'package:news_app/middleware/get_news_middleware.dart';
-import 'package:news_app/app_state/app_state.dart';
+import 'package:news_app/redux/middleware/get_news_middleware.dart';
+import 'package:news_app/redux/app_state/app_state.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:news_app/Model/post.dart';
 import 'package:news_app/View/news_list.dart';
-import 'package:news_app/app_state/app_state.dart';
-import 'package:news_app/middleware/user_middleware.dart';
-import 'package:news_app/model/user.dart';
+import 'package:news_app/redux/app_state/app_state.dart';
 import 'package:news_app/view/profile/edit_post.dart';
 import 'package:news_app/view/user_card.dart';
 import 'package:redux/redux.dart';
-import 'package:news_app/middleware/get_news_middleware.dart';
+import 'package:news_app/redux/middleware/get_news_middleware.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);

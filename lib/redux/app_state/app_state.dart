@@ -1,5 +1,5 @@
 import 'package:news_app/Model/post.dart';
-import 'package:news_app/app_state/screen_state.dart';
+import 'package:news_app/redux/app_state/screen_state.dart';
 import 'package:news_app/model/user.dart';
 
 enum LoadingState { success, loading, error }

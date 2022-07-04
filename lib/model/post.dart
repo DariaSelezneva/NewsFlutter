@@ -71,7 +71,7 @@ class Post {
     final image = json['image'] as String;
     final username = json['username'] as String;
     final tagsList = json['tags'] as List;
-    final tags = tagsList.map((e) => e.toString()).toList();
+    final tags = tagsList.map((e) => e['title'].toString()).toList();
     return Post(id: id, userId: userId, title: title, description: description, image: image, username: username, tags: tags);
   }
 }

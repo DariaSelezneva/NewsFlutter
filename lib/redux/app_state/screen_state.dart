@@ -5,6 +5,7 @@ class ScreenState {
   final List<Post> news;
   final int page;
   final int numberOfElements;
+  final List<String> activeTags = [];
 
   final User? user;
 

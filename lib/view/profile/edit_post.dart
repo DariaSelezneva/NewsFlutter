@@ -1,13 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news_app/Model/post.dart';
-import 'package:news_app/app_state/app_state.dart';
+import 'package:news_app/redux/app_state/app_state.dart';
 import 'package:news_app/model/user.dart';
 import 'package:news_app/view/image_picker.dart';
 import 'package:redux/redux.dart';
-import 'package:news_app/middleware/user_middleware.dart';
+import 'package:news_app/redux/middleware/post_actions_middleware.dart';
 
 class EditPostSheet extends StatefulWidget {
   const EditPostSheet({Key? key, this.post, required this.user}) : super(key: key);
@@ -83,6 +82,10 @@ class _EditPostSheetState extends State<EditPostSheet> {
                               Expanded(
                                   child: ElevatedButton(
                                       onPressed: () {
+                                        final regex = RegExp('#[A-Za-z0-9]+');
+                                        final tags = regex.allMatches(_description)
+                                            .map((e) => e.group(0).toString().substring(1))
+                                            .toList();
                                         if (widget.post == null) {
                                             store.dispatch((store) => createPost(
                                                 store,
@@ -90,7 +93,7 @@ class _EditPostSheetState extends State<EditPostSheet> {
                                                 _image,
                                                 _title,
                                                 _description,
-                                                []));
+                                                tags));
                                           }
                                         else {
                                           store.dispatch((store) => updatePost(
@@ -101,7 +104,7 @@ class _EditPostSheetState extends State<EditPostSheet> {
                                               widget.post!.image,
                                               widget.post!.title,
                                               widget.post!.description,
-                                              []));
+                                              tags));
                                         }
                                         Navigator.pop(context);
                                         },

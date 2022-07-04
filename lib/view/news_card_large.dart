@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:news_app/Model/post.dart';
 import 'package:news_app/View/tags_list.dart';
-import 'package:news_app/app_state/app_state.dart';
+import 'package:news_app/redux/app_state/app_state.dart';
 import 'package:news_app/view/profile/edit_post.dart';
 import 'package:redux/redux.dart';
 
@@ -20,7 +20,7 @@ class NewsCardLarge extends StatelessWidget {
   final bool isEditable;
   final Function(String tag) onTapTag;
 
-  void _onUserNamePressed() {
+  void _onUserNamePressed(Store<AppState> store) {
     print('pressed!');
   }
 
@@ -64,6 +64,7 @@ class NewsCardLarge extends StatelessWidget {
                               onTapTag: onTapTag),
                           if (isEditable)
                             IconButton(
+                                icon: const Icon(Icons.edit),
                                 onPressed: () {
                                   showModalBottomSheet(
                                       context: context,
@@ -77,8 +78,8 @@ class NewsCardLarge extends StatelessWidget {
                                         return EditPostSheet(
                                             post: post, user: user);
                                       });
-                                },
-                                icon: const Icon(Icons.edit))
+                                   },
+                                )
                         ] // Row children
                         )),
               ], // Column children
